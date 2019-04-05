@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html  ng-app='KanbanApp'><!-- para indicar que esta usando angular debe estar igual que el module de la js-->
+<head ><!-- llamamos el angular -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	<script src="app.js"></script>
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div ng-controller = 'KanbanController as KanbanCtrl'><!--el controller es para conectar el angular coon el html (maniobrarlo)--><!--si lo dejamos KanbanController tendremos que estarlo llamando ya que es statico -->
+	<p>{{KanbanCtrl.demo}}</p>
+	<p >{{demoview}}</p><!-- muestra nuestro bjeto-->
+	<!--<input type="text" ng-model="demoview.name" >!-- aqui creamos obj y enlasamos  
+	//<button ng-click ="KanbanCtrl.show()">boton</button>-->
+	<h1>Kanban Board</h1>
+	<form ng-submit = 'KanbanCtrl.show();'><!--  -->
+	<span>no se que dijo</span>
+	<input type="text" ng-model="newObj.name"><!--  -->
+	<input type="text" ng-model="newObj.descripcion">
+	<input type="submit" value="Add">
+	</form>
+	<p>{{KanbanCtrl.tasks}}</p>
+	
+	<ul>
+		<h3>todo</h3>
+		<li ng-repeat="task in KanbanCtrl.tasks | filter: {status: 1}">
+		<span>{{task.name}}</span>
+		<button ng-click ="KanbanCtrl.next(task.index)">Next</button>
+		</li>
+	</ul>
+	<ul>
+		<h3>doing</h3>
+		<li ng-repeat="task in KanbanCtrl.tasks | filter: {status: 2}">
+		<span>{{task.name}}</span>
+		<button ng-click ="KanbanCtrl.next(task.index)">Next</button>
+		<button ng-click ="KanbanCtrl.after(task.index)">After</button>-
+		</li>
+	</ul>
+	<ul>
+		<h3>done</h3>
+		<li ng-repeat="task in KanbanCtrl.tasks | filter: {status: 3}">
+		<span>{{task.name}}</span>
+		</li>
+	</ul>
+
+</div>
+	<p>{{1+2}}</p><!-- sirve como console log -->
+</body>
+</html>
